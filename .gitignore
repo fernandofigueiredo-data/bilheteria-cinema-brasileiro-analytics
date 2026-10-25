@@ -1,0 +1,11 @@
+.venv/
+dados/
+extraido/
+__pycache__/
+*.pyc
+.DS_Store
+saidas/
+.ipynb_checkpoints/
+.jupyter/
+.jupyter_ystore.db
+testes/*_antes.*

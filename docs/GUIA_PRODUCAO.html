@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia de Produção</title>
+<style>
+  :root {
+    --bg: #f6f5fb; --surface: #ffffff; --text: #1d1b26; --muted: #5d5a6b;
+    --border: #e3e0ee; --accent: #6f42c1; --accent-soft: #efe8fb;
+    --code-bg: #1e1b2b; --code-text: #ece9f7; --ok: #1f7a4d; --ok-soft: #e4f4ec;
+    --warn: #8a5a00; --warn-soft: #fdf1dc; --danger: #a12d3a; --danger-soft: #fbe6e8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #13111c; --surface: #1c1928; --text: #ece9f7; --muted: #a9a4bd;
+      --border: #2e2a40; --accent: #b48cff; --accent-soft: #2a2140;
+      --code-bg: #0d0b14; --code-text: #ece9f7; --ok: #6fd3a0; --ok-soft: #15291f;
+      --warn: #f0c060; --warn-soft: #2e2512; --danger: #ff8a96; --danger-soft: #32161b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #13111c; --surface: #1c1928; --text: #ece9f7; --muted: #a9a4bd;
+    --border: #2e2a40; --accent: #b48cff; --accent-soft: #2a2140;
+    --code-bg: #0d0b14; --code-text: #ece9f7; --ok: #6fd3a0; --ok-soft: #15291f;
+    --warn: #f0c060; --warn-soft: #2e2512; --danger: #ff8a96; --danger-soft: #32161b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 40px 16px 80px; }
+  header h1 { font-size: 2rem; margin: 0 0 6px; letter-spacing: -0.02em; }
+  header p { color: var(--muted); margin: 0; }
+  nav { margin: 28px 0; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+  nav ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 32px; }
+  nav a { color: var(--accent); text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+            padding: 24px 24px 12px; margin: 20px 0; }
+  h2 { margin: 0 0 12px; font-size: 1.3rem; display: flex; gap: 10px; align-items: baseline; }
+  h2 .n { color: var(--accent); font-variant-numeric: tabular-nums; }
+  h3 { font-size: 1.02rem; margin: 20px 0 6px; }
+  p, li { color: var(--text); }
+  .muted { color: var(--muted); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.88em;
+         background: var(--accent-soft); padding: 1px 5px; border-radius: 4px; }
+  .code { position: relative; margin: 10px 0 16px; }
+  .code pre { background: var(--code-bg); color: var(--code-text); padding: 14px 16px; border-radius: 8px;
+              overflow-x: auto; margin: 0; font: 13.5px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .code button { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.1); color: var(--code-text);
+                 border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 3px 9px; font-size: 12px; cursor: pointer; }
+  .code button:hover { background: rgba(255,255,255,0.2); }
+  .callout { border-radius: 8px; padding: 12px 16px; margin: 12px 0 16px; border-left: 4px solid; }
+  .ok { background: var(--ok-soft); border-color: var(--ok); }
+  .warn { background: var(--warn-soft); border-color: var(--warn); }
+  .danger { background: var(--danger-soft); border-color: var(--danger); }
+  .callout strong { display: block; margin-bottom: 2px; }
+  .table-wrap { overflow-x: auto; margin: 10px 0 16px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  .tag { display: inline-block; font-size: 0.75rem; padding: 1px 8px; border-radius: 999px; font-weight: 600; }
+  .tag.ok { background: var(--ok-soft); color: var(--ok); border: 0; }
+  .tag.warn { background: var(--warn-soft); color: var(--warn); border: 0; }
+  .tag.danger { background: var(--danger-soft); color: var(--danger); border: 0; }
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li { padding: 4px 0 4px 28px; position: relative; }
+  .checklist input { position: absolute; left: 0; top: 9px; accent-color: var(--accent); }
+  .tree { font-family: ui-monospace, Menlo, monospace; font-size: 13px; line-height: 1.5; }
+  .theme-btn { float: right; background: var(--surface); color: var(--text); border: 1px solid var(--border);
+               border-radius: 8px; padding: 6px 12px; cursor: pointer; font-size: 13px; }
+  @media (max-width: 640px) {
+    nav ol { columns: 1; }
+    section { padding: 18px 16px 8px; }
+    header h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <button class="theme-btn" id="themeBtn" type="button">Tema</button>
+    <h1>Bilheteria Diária Dash: guia de produção</h1>
+    <p>Do projeto local a um link público, passo a passo. Também explica o que pode ser apagado e como atualizar os dados.</p>
+  </header>
+
+  <nav aria-label="Sumário">
+    <ol>
+      <li><a href="#zips">Posso apagar os .zip?</a></li>
+      <li><a href="#oque">O que vai para produção</a></li>
+      <li><a href="#preparar">Preparar o projeto</a></li>
+      <li><a href="#github">Publicar no GitHub</a></li>
+      <li><a href="#render">Deploy no Render (recomendado)</a></li>
+      <li><a href="#alternativas">Outras hospedagens</a></li>
+      <li><a href="#apresentar">Exibição rápida, sem deploy</a></li>
+      <li><a href="#atualizar">Atualizar os dados</a></li>
+      <li><a href="#checklist">Checklist final</a></li>
+    </ol>
+  </nav>
+
+  <section id="zips">
+    <h2><span class="n">1</span> Posso apagar os arquivos .zip?</h2>
+    <p><strong>Sim, com uma ressalva.</strong> O dashboard não precisa dos zips para funcionar: ele lê apenas <code>data_bilheteria.csv</code> e <code>data_ranking.csv</code> (11 MB no total). Os zips só servem para <em>refazer o pipeline do zero</em>.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Arquivo</th><th>Tamanho</th><th>Para que serve</th><th>Apagar?</th></tr></thead>
+      <tbody>
+        <tr><td><code>bilheteria-…-distribuidoras-csv.zip</code><br><code>bilheteria-…-exibidoras-csv.zip</code></td><td>1,7 GB</td><td>Originais da ANCINE; recriam tudo desde o início</td><td><span class="tag warn">Pode, se tiver backup</span></td></tr>
+        <tr><td><code>dados/bilheteria_unificada.csv.gz</code></td><td>1,8 GB</td><td>CSV unificado (entregável da etapa 2); gera os agregados do dashboard</td><td><span class="tag danger">Mantenha</span></td></tr>
+        <tr><td><code>dados/staging/*.parquet</code></td><td>0,5 GB</td><td>Cópia intermediária; só é usada para refazer o perfil e a unificação</td><td><span class="tag ok">Pode</span></td></tr>
+        <tr><td><code>.venv/</code></td><td>0,3 GB</td><td>Ambiente Python local; recriável com <code>uv</code></td><td><span class="tag ok">Pode (recria)</span></td></tr>
+        <tr><td><code>projeto_completo/</code></td><td>11 MB</td><td>O dashboard</td><td><span class="tag danger">Mantenha</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout warn"><strong>Recomendação</strong>Antes de apagar, mova os zips para um disco externo ou para a nuvem (Google Drive, iCloud). Eles são os únicos arquivos que permitem refazer o perfil e a unificação. O CSV unificado regenera os agregados do dashboard, mas não refaz o perfil dos arquivos originais.</div>
+    <p class="muted">Se apagar sem backup, os mesmos conjuntos ("bilheteria diária de obras por distribuidoras" e "por exibidoras") podem ser baixados de novo no portal de dados abertos da ANCINE, já em versão atualizada.</p>
+  </section>
+
+  <section id="oque">
+    <h2><span class="n">2</span> O que vai para produção</h2>
+    <p>Apenas a pasta <code>projeto_completo/</code>. Ela é pequena, autossuficiente e já tem o <code>Procfile</code> e o <code>requirements.txt</code>, como no GasPrices.</p>
+    <pre class="tree">BilheteriaDash/
+├── projeto_completo/        ← o que roda no servidor (11 MB)
+│   ├── app.py               instância Dash; expõe server para o gunicorn
+│   ├── index.py             layout + callbacks
+│   ├── assets/styles.css
+│   ├── data_bilheteria.csv  10 MB
+│   ├── data_ranking.csv     1,5 MB
+│   ├── requirements.txt
+│   └── Procfile
+├── pipeline/  schema.sql  *.md   ← vão para o GitHub (documentação/portfólio)
+└── dados/  .venv/                ← NÃO vão para o GitHub (grandes/recriáveis)</pre>
+    <div class="callout ok"><strong>Testado localmente</strong><code>gunicorn index:server</code> sobe sem erro e responde HTTP 200. Cada worker usa de <strong>230 a 350 MB de RAM</strong> (no início e depois de uso), o que define a configuração dos planos gratuitos (passo 5).</div>
+  </section>
+
+  <section id="preparar">
+    <h2><span class="n">3</span> Preparar o projeto</h2>
+    <div class="callout ok"><strong>Já feito neste projeto</strong>Os passos 3.1 a 3.4 já foram aplicados: <code>.gitignore</code>, <code>projeto_completo/.python-version</code>, o <code>Procfile</code> abaixo e o <code>app.title</code>. O comando do Procfile foi testado com gunicorn, com fonte, tema e Play funcionando. O conteúdo fica aqui como referência.</div>
+    <h3>3.1 Criar o <code>.gitignore</code> em <code>BilheteriaDash/</code></h3>
+    <p>O GitHub recusa arquivos acima de 100 MB, e o CSV unificado tem 1,8 GB. Ele precisa ficar fora do repositório.</p>
+    <div class="code"><button type="button">Copiar</button><pre>.venv/
+dados/
+extraido/
+__pycache__/
+*.pyc
+.DS_Store</pre></div>
+
+    <h3>3.2 Fixar a versão do Python</h3>
+    <p>Crie <code>projeto_completo/.python-version</code>. O projeto foi testado em Python 3.12, e as hospedagens leem esse arquivo para escolher a versão.</p>
+    <div class="code"><button type="button">Copiar</button><pre>3.12</pre></div>
+
+    <h3>3.3 Ajustar o <code>Procfile</code> para pouca memória</h3>
+    <p>Um worker com várias threads cabe nos 512 MB dos planos gratuitos. Dois workers (até cerca de 700 MB) passam do limite.</p>
+    <div class="code"><button type="button">Copiar</button><pre>web: gunicorn index:server --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 120</pre></div>
+
+    <h3>3.4 (Opcional) Título da aba do navegador</h3>
+    <p>Hoje a aba mostra "Dash". Em <code>app.py</code>, logo depois de criar o <code>app</code>:</p>
+    <div class="code"><button type="button">Copiar</button><pre>app.title = "Bilheteria Diária – Brasil"</pre></div>
+
+    <h3>3.5 Testar como em produção</h3>
+    <div class="code"><button type="button">Copiar</button><pre>cd BilheteriaDash/projeto_completo
+PORT=8050 ../.venv/bin/gunicorn index:server --bind 0.0.0.0:8050 --workers 1 --threads 4</pre></div>
+    <p class="muted">Abra http://127.0.0.1:8050. Se tudo carregar, o servidor de produção também vai carregar.</p>
+  </section>
+
+  <section id="github">
+    <h2><span class="n">4</span> Publicar no GitHub</h2>
+    <p>Você já tem <code>git</code> e <code>gh</code> instalados. Com o <code>.gitignore</code> do passo 3.1 criado:</p>
+    <div class="code"><button type="button">Copiar</button><pre>cd BilheteriaDash
+git init
+git add .
+git status            # confira: dados/ e .venv/ NÃO podem aparecer
+git commit -m "Dashboard de bilheteria diária (ANCINE)"
+gh repo create bilheteria-dash --public --source=. --push</pre></div>
+    <div class="callout warn"><strong>Confira antes do push</strong>Rode <code>git status</code> e verifique se nenhum arquivo maior que 100 MB foi incluído. Se o <code>.csv.gz</code> aparecer, o <code>.gitignore</code> não está na pasta certa.</div>
+  </section>
+
+  <section id="render">
+    <h2><span class="n">5</span> Deploy no Render (recomendado)</h2>
+    <p>O Render roda o <code>Procfile</code> e o <code>requirements.txt</code> sem configuração extra, é o substituto natural do Heroku usado no GasPrices e tem plano gratuito.</p>
+    <ol>
+      <li>Crie uma conta em <strong>render.com</strong> e conecte o GitHub.</li>
+      <li><strong>New → Web Service</strong> e escolha o repositório <code>bilheteria-dash</code>.</li>
+      <li>Preencha:
+        <div class="table-wrap"><table>
+          <tbody>
+            <tr><th>Root Directory</th><td><code>projeto_completo</code></td></tr>
+            <tr><th>Runtime</th><td>Python 3</td></tr>
+            <tr><th>Build Command</th><td><code>pip install -r requirements.txt</code></td></tr>
+            <tr><th>Start Command</th><td><code>gunicorn index:server --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 120</code></td></tr>
+            <tr><th>Instance Type</th><td>Free (512 MB) para demonstração; Starter para uso contínuo</td></tr>
+          </tbody>
+        </table></div>
+      </li>
+      <li>Clique em <strong>Create Web Service</strong>. O primeiro build leva de 3 a 5 minutos. No fim, o painel mostra uma URL do tipo <code>https://bilheteria-dash.onrender.com</code>.</li>
+    </ol>
+    <div class="callout warn"><strong>Plano gratuito "dorme"</strong>Depois de cerca de 15 minutos sem acesso, o serviço é suspenso, e o próximo acesso leva perto de 1 minuto para acordar. Para uma apresentação, abra o link alguns minutos antes. Para uso contínuo, use um plano pago.</div>
+    <p>A cada <code>git push</code> na branch principal, o Render refaz o deploy sozinho.</p>
+  </section>
+
+  <section id="alternativas">
+    <h2><span class="n">6</span> Outras hospedagens</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Opção</th><th>Quando usar</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Render</strong></td><td>Portfólio, demonstração</td><td>Gratuito, com hibernação; usa o Procfile</td></tr>
+        <tr><td><strong>Railway</strong></td><td>Sem hibernação, custo baixo</td><td>Usa o mesmo Procfile; cobra por uso, com crédito inicial</td></tr>
+        <tr><td><strong>Hugging Face Spaces</strong></td><td>Gratuito com mais memória</td><td>Exige o modo Docker (Dockerfile abaixo) e a porta 7860</td></tr>
+        <tr><td><strong>Heroku</strong></td><td>Igual ao GasPrices original</td><td>Não tem mais plano gratuito; o Procfile funciona sem mudança</td></tr>
+        <tr><td><strong>Servidor próprio / VPS</strong></td><td>Controle total, uso interno</td><td>Docker + proxy reverso (Nginx/Caddy) com HTTPS</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Dockerfile (para Hugging Face, VPS ou qualquer nuvem com contêiner)</h3>
+    <p>Salve como <code>projeto_completo/Dockerfile</code>:</p>
+    <div class="code"><button type="button">Copiar</button><pre>FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+ENV PORT=7860
+EXPOSE 7860
+CMD gunicorn index:server --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 120</pre></div>
+    <div class="code"><button type="button">Copiar</button><pre>cd BilheteriaDash/projeto_completo
+docker build -t bilheteria-dash .
+docker run --rm -p 7860:7860 bilheteria-dash</pre></div>
+  </section>
+
+  <section id="apresentar">
+    <h2><span class="n">7</span> Exibição rápida, sem deploy</h2>
+    <p>Para mostrar o dashboard numa reunião ou aula, sem hospedar:</p>
+    <h3>No seu computador</h3>
+    <div class="code"><button type="button">Copiar</button><pre>cd BilheteriaDash/projeto_completo
+../.venv/bin/python index.py</pre></div>
+    <p>Abra http://127.0.0.1:8050 e use o navegador em tela cheia. Para o modo apresentação, dá para alternar o tema e usar o botão <strong>Play</strong>.</p>
+    <h3>Link temporário para outras pessoas</h3>
+    <p>Com o dashboard rodando, um túnel cria uma URL pública provisória, que vale enquanto o comando estiver aberto:</p>
+    <div class="code"><button type="button">Copiar</button><pre>brew install cloudflared
+cloudflared tunnel --url http://127.0.0.1:8050</pre></div>
+    <div class="callout warn"><strong>Atenção</strong>Quem tiver o link acessa o seu computador por essa porta enquanto o túnel estiver ativo. Os dados são públicos, mas encerre o túnel (Ctrl+C) ao terminar.</div>
+  </section>
+
+  <section id="atualizar">
+    <h2><span class="n">8</span> Atualizar os dados</h2>
+    <p>A ANCINE atualiza os conjuntos com frequência (os arquivos atuais vão até setembro e outubro de 2026). Para atualizar o dashboard:</p>
+    <ol>
+      <li>Baixe os dois zips novos no portal de dados abertos da ANCINE e salve-os na pasta acima de <code>BilheteriaDash/</code>.</li>
+      <li>Garanta cerca de 16 GB livres em disco (para a extração temporária).</li>
+      <li>Rode o pipeline, que leva perto de 10 minutos:
+        <div class="code"><button type="button">Copiar</button><pre>cd BilheteriaDash
+rm -rf extraido dados/staging
+mkdir -p extraido/distribuidoras extraido/exibidoras
+unzip -q ../bilheteria-diaria-obras-por-distribuidoras-csv.zip -d extraido/distribuidoras
+unzip -q ../bilheteria-diaria-obras-por-exibidoras-csv.zip -d extraido/exibidoras
+.venv/bin/python -I pipeline/perfil.py extraido dados/staging - dados/perfil.json
+.venv/bin/python -I pipeline/unificar.py dados/staging dados/perfil.json dados/bilheteria_unificada.csv.gz dados/reconciliacao.json
+.venv/bin/python -I pipeline/agregar_dashboard.py dados/bilheteria_unificada.csv.gz projeto_completo
+rm -rf extraido</pre></div>
+      </li>
+      <li>Confira em <code>dados/reconciliacao.json</code> se <code>antes</code> é igual a <code>depois</code> nas duas fontes.</li>
+      <li>Publique: o Render refaz o deploy sozinho.
+        <div class="code"><button type="button">Copiar</button><pre>git add projeto_completo/data_bilheteria.csv projeto_completo/data_ranking.csv
+git commit -m "Atualiza dados da ANCINE"
+git push</pre></div>
+      </li>
+    </ol>
+    <p class="muted">Os anos do RangeSlider e os filtros se ajustam sozinhos aos dados novos, porque são lidos do CSV.</p>
+  </section>
+
+  <section id="checklist">
+    <h2><span class="n">9</span> Checklist final</h2>
+    <ul class="checklist">
+      <li><label><input type="checkbox"> Zips copiados para um backup antes de apagar</label></li>
+      <li><label><input type="checkbox"> <code>.gitignore</code> criado, e <code>dados/</code> e <code>.venv/</code> fora do repositório</label></li>
+      <li><label><input type="checkbox"> <code>.python-version</code> com <code>3.12</code> em <code>projeto_completo/</code></label></li>
+      <li><label><input type="checkbox"> <code>Procfile</code> com <code>--workers 1 --threads 4</code></label></li>
+      <li><label><input type="checkbox"> Teste local com gunicorn abrindo sem erro</label></li>
+      <li><label><input type="checkbox"> Repositório no GitHub sem arquivos acima de 100 MB</label></li>
+      <li><label><input type="checkbox"> Render com Root Directory <code>projeto_completo</code></label></li>
+      <li><label><input type="checkbox"> URL pública abrindo: gráficos com dados, troca de fonte e de tema, Play funcionando</label></li>
+      <li><label><input type="checkbox"> README atualizado com o link do dashboard publicado</label></li>
+    </ul>
+  </section>
+</div>
+<script>
+  document.querySelectorAll('.code button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var txt = btn.parentElement.querySelector('pre').innerText;
+      var done = function () { btn.textContent = 'Copiado'; setTimeout(function () { btn.textContent = 'Copiar'; }, 1500); };
+      if (navigator.clipboard) { navigator.clipboard.writeText(txt).then(done, function () {}); }
+    });
+  });
+  (function () {
+    var root = document.documentElement, btn = document.getElementById('themeBtn');
+    try { var t = localStorage.getItem('guia-tema'); if (t) root.setAttribute('data-theme', t); } catch (e) {}
+    btn.addEventListener('click', function () {
+      var dark = root.getAttribute('data-theme') === 'dark' ||
+        (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+      var next = dark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('guia-tema', next); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>
