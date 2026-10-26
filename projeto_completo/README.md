@@ -1,6 +1,6 @@
 # Bilheteria Diária Dash
 
-Dashboard da bilheteria diária de cinema no Brasil (2014–2026), feito em Python com dados abertos da ANCINE. Ele reproduz a arquitetura, a stack e o visual do projeto **GasPrices** (ver `../docs/ARQUITETURA_GASPRICES.md`), trocando preços de combustível por público de cinema.
+Dashboard da bilheteria diária de cinema no Brasil (2014–2026), feito em Python com dados abertos da ANCINE.
 
 O dashboard tem duas abas: **Visão geral**, a exploração por UF, período e fonte, e **Recuperação pós-pandemia**, que responde às perguntas de negócio de `../analise.ipynb` em 24 gráficos e 3 KPIs.
 

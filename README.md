@@ -93,8 +93,6 @@ O notebook mostra os resultados já executados, então dá para ler a análise d
 - A fonte das exibidoras só cobre o país todo a partir de 2017, e 2026 está incompleto.
 - Tudo aqui são associações. Nada disso prova causa.
 
-## Sobre o projeto
-
-A arquitetura do dashboard parte de um projeto de curso sobre preços de gasolina (Dash + Plotly), descrito em [`docs/ARQUITETURA_GASPRICES.md`](docs/ARQUITETURA_GASPRICES.md). O domínio, os dados, a limpeza, a análise, as perguntas e o design são novos.
+## Autor
 
 Feito por **Fernando Figueiredo**. Licença [MIT](LICENSE). Os dados são abertos e pertencem à ANCINE.

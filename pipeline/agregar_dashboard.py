@@ -1,4 +1,4 @@
-"""Gera os CSVs agregados que o dashboard lê com pd.read_csv (como o GasPrices lê data_gas.csv).
+"""Gera os CSVs agregados que o dashboard lê com pd.read_csv, sem banco de dados.
 
 Uso: python -I pipeline/agregar_dashboard.py <bilheteria_limpa.csv.gz> <dir_saida>
 

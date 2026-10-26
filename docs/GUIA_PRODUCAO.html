@@ -117,7 +117,7 @@
 
   <section id="oque">
     <h2><span class="n">2</span> O que vai para produção</h2>
-    <p>Apenas a pasta <code>projeto_completo/</code>. Ela é pequena, autossuficiente e já tem o <code>Procfile</code> e o <code>requirements.txt</code>, como no GasPrices.</p>
+    <p>Apenas a pasta <code>projeto_completo/</code>. Ela é pequena, autossuficiente e já tem o <code>Procfile</code> e o <code>requirements.txt</code>.</p>
     <pre class="tree">BilheteriaDash/
 ├── projeto_completo/        ← o que roda no servidor (11 MB)
 │   ├── app.py               instância Dash; expõe server para o gunicorn
@@ -176,7 +176,7 @@ gh repo create bilheteria-dash --public --source=. --push</pre></div>
 
   <section id="render">
     <h2><span class="n">5</span> Deploy no Render (recomendado)</h2>
-    <p>O Render roda o <code>Procfile</code> e o <code>requirements.txt</code> sem configuração extra, é o substituto natural do Heroku usado no GasPrices e tem plano gratuito.</p>
+    <p>O Render roda o <code>Procfile</code> e o <code>requirements.txt</code> sem configuração extra, é uma alternativa ao Heroku e tem plano gratuito.</p>
     <ol>
       <li>Crie uma conta em <strong>render.com</strong> e conecte o GitHub.</li>
       <li><strong>New → Web Service</strong> e escolha o repositório <code>bilheteria-dash</code>.</li>
@@ -205,7 +205,7 @@ gh repo create bilheteria-dash --public --source=. --push</pre></div>
         <tr><td><strong>Render</strong></td><td>Portfólio, demonstração</td><td>Gratuito, com hibernação; usa o Procfile</td></tr>
         <tr><td><strong>Railway</strong></td><td>Sem hibernação, custo baixo</td><td>Usa o mesmo Procfile; cobra por uso, com crédito inicial</td></tr>
         <tr><td><strong>Hugging Face Spaces</strong></td><td>Gratuito com mais memória</td><td>Exige o modo Docker (Dockerfile abaixo) e a porta 7860</td></tr>
-        <tr><td><strong>Heroku</strong></td><td>Igual ao GasPrices original</td><td>Não tem mais plano gratuito; o Procfile funciona sem mudança</td></tr>
+        <tr><td><strong>Heroku</strong></td><td>Usa o Procfile que já existe</td><td>Não tem mais plano gratuito; o Procfile funciona sem mudança</td></tr>
         <tr><td><strong>Servidor próprio / VPS</strong></td><td>Controle total, uso interno</td><td>Docker + proxy reverso (Nginx/Caddy) com HTTPS</td></tr>
       </tbody>
     </table></div>
