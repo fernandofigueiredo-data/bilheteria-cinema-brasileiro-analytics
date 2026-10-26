@@ -2,6 +2,8 @@
 
 Análise de **60 milhões de registros** de bilheteria diária da ANCINE (2014 a setembro de 2026), com pipeline de limpeza, notebook de análise e dashboard interativo.
 
+**[Ver o dashboard no ar](https://bilheteria-cinema-brasileiro-analytics.onrender.com)** (no plano gratuito do Render, a primeira visita pode levar cerca de 1 minuto para acordar o serviço).
+
 ![Dashboard: aba Recuperação pós-pandemia](docs/img/dashboard_recuperacao.png)
 
 ## O que descobri
